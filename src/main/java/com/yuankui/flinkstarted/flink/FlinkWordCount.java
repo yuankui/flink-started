@@ -42,7 +42,7 @@ public class FlinkWordCount {
                 }, TypeInformation.of(WordWithCount.class))
                 .keyBy(wc -> wc.word)
                 .timeWindow(Time.seconds(3))
-                .sum(0);
+                .reduce((w1, w2) -> new WordWithCount(w1.getWord(), w1.getCount() + w2.getCount()));
 
         // 5. 打印结果,设置并行度
         counts.print().setParallelism(1);
