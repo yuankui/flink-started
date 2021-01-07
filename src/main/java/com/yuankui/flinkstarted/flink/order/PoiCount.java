@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class PoiCount {
     private int poiId;
     private long count;
+    private long sum;
 }

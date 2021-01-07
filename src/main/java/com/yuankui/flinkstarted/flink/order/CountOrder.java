@@ -32,7 +32,12 @@ public class CountOrder {
                     public void process(Integer poiId, Context context, Iterable<Order> elements, Collector<PoiCount> out) throws Exception {
                         long count = StreamSupport.stream(elements.spliterator(), false)
                                 .count();
-                        out.collect(new PoiCount(poiId, count));
+
+                        long sum = StreamSupport.stream(elements.spliterator(), false)
+                                .mapToInt(Order::getPrice)
+                                .sum();
+
+                        out.collect(new PoiCount(poiId, count, sum));
                     }
                 })
                 .addSink(new ElasticSink("http://some/index"));
