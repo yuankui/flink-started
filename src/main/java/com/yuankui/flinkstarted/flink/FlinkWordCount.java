@@ -20,6 +20,13 @@ public class FlinkWordCount {
         public long count;
     }
 
+    /**
+     * 启动任务：
+     *  ./bin/flink run examples/streaming/WordCount.jar
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         // 1. 解析外部参数,获取要监听的主机、端口,没有配置则取默认值localhost:9999
         ParameterTool tool = ParameterTool.fromArgs(args);
